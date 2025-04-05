@@ -6,7 +6,7 @@
 /*   By: ansebast <ansebast@student.42luanda.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:42:03 by ansebast          #+#    #+#             */
-/*   Updated: 2025/04/05 09:07:27 by ansebast         ###   ########.fr       */
+/*   Updated: 2025/04/05 10:09:15 by ansebast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,49 @@ ClapTrap::~ClapTrap()
 	std::cout << this->name << " Destrutor Called\n";
 }
 
+std::string ClapTrap::getName( void ) const
+{
+	return ( this->name );
+}
 
 void ClapTrap::attack(const std::string& target)
 {
+	if (!canDoAny())
+	{
+		std::cout << "ClapTrap " << this->name << " cannot attak because it has not hit points or energy points left\n";
+		return ;
+	}
+	this->energyPoints--;
 	std::cout << "ClapTrap " << this->name << " attacks " << target << ", causing " << this->attackDemage << " points of damage!\n";
 }
 void ClapTrap::takeDamage(unsigned int amount)
 {
+	if (this->hitPoints == 0)
+	{
+		std::cout << "ClapTrap " << this->name << " has not hit points left to take any more damage.\n";
+		return ;
+	}
 	this->hitPoints -= amount;
-	std::cout << "ClapTrap " << this->name << " takes damage causing a loss of " << amount << " health points\n";
-	std::cout << "Points remaining: " << this->hitPoints;
+	std::cout << "ClapTrap " << this->name << " takes damage causing a loss of " << amount << " hit points\n";
+	std::cout << "Hit Points remaining: " << this->hitPoints << std::endl;
 }
 void ClapTrap::beRepaired(unsigned int amount)
 {
+	if (!canDoAny())
+	{
+		std::cout << "ClapTrap " << this->name << " cannot repairs itself because it has no energy points left\n";
+		return ;
+	}
+	this->hitPoints += amount;
+	this->energyPoints--;
 	std::cout << "ClapTrap " << this->name << " repairs itself, gaining " 
                   << amount << " hit points! Now has " << this->hitPoints 
 		  << " hit points." << std::endl;
+}
+
+bool ClapTrap::canDoAny( void ) const
+{
+	bool canDo = this->hitPoints > 0 && this->energyPoints > 0;
+	
+	return ( canDo );
 }
