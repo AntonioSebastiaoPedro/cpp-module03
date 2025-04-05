@@ -6,7 +6,16 @@
 /*   By: ansebast <ansebast@student.42luanda.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:42:03 by ansebast          #+#    #+#             */
-/*   Updated: 2025/04/01 07:13:10 by ansebast         ###   ########.fr       */
+/*   Updated: 2025/04/05 09:09:30 by ansebast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+# include "ClapTrap.hpp"
+
+int main( void )
+{
+	ClapTrap clap1;
+	ClapTrap clap2("Clark");
+
+	clap1.attack("Clark");
+}
