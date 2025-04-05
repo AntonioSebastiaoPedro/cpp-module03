@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ansebast <ansebast@student.42luanda.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:42:03 by ansebast          #+#    #+#             */
-/*   Updated: 2025/04/05 13:28:13 by ansebast         ###   ########.fr       */
+/*   Updated: 2025/04/05 15:26:46 by ansebast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+# ifndef SCAVTRAP
+# define SCAVTRAP
+
 # include "ClapTrap.hpp"
 
-int main( void )
+class ScavTrap : public ClapTrap
 {
-	ClapTrap clap1;
-	ClapTrap clap2("Clark");
+	public:
+		ScavTrap();
+		ScavTrap( const std::string& name );
+		ScavTrap( const ScavTrap &clap );
+		ScavTrap& operator=( const ScavTrap& clap );
+		~ScavTrap();
 
-	std::cout << std::endl;
-	clap1.attack(clap2.getName());
-	std::cout << std::endl;
-	clap2.takeDamage(8);
-	std::cout << std::endl;
-	clap2.beRepaired(2);
-	std::cout << std::endl;
-	
-	return (0);
-}
+		void attack( const std::string& target );
+		void guardGate( void );
+};
+
+# endif

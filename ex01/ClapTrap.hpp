@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ansebast <ansebast@student.42luanda.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:42:03 by ansebast          #+#    #+#             */
-/*   Updated: 2025/04/05 13:28:13 by ansebast         ###   ########.fr       */
+/*   Updated: 2025/04/05 13:46:25 by ansebast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ClapTrap.hpp"
+# ifndef CLAPTRAP
+# define CLAPTRAP
 
-int main( void )
+# include <iostream>
+
+class ClapTrap
 {
-	ClapTrap clap1;
-	ClapTrap clap2("Clark");
+	protected:
+		std::string name;
+		unsigned int hitPoints;
+		unsigned int energyPoints;
+		unsigned int attackDemage;
+	public:
+		ClapTrap();
+		ClapTrap( const std::string& name );
+		ClapTrap( const ClapTrap &clap );
+		ClapTrap& operator=( const ClapTrap& clap );
+		~ClapTrap();
 
-	std::cout << std::endl;
-	clap1.attack(clap2.getName());
-	std::cout << std::endl;
-	clap2.takeDamage(8);
-	std::cout << std::endl;
-	clap2.beRepaired(2);
-	std::cout << std::endl;
-	
-	return (0);
-}
+		std::string getName( void ) const;
+
+		void attack( const std::string& target );
+		void takeDamage( unsigned int amount );
+		void beRepaired( unsigned int amount );
+		bool canDoAny( void ) const;
+};
+
+# endif
